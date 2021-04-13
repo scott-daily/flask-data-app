@@ -2,6 +2,20 @@ from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 import joblib
 import praw
+import os
+
+is_prod = os.environ.get('IS_HEROKU', None)
+
+if is_prod:
+    reddit = praw.Reddit(
+        client_id=os.environ['CLIENT_ID'],
+        client_secret=os.environ['CLIENT_SECRET'],
+        password=os.environ['REDDIT_PASSWORD'],
+        user_agent=os.environ['USER_AGENT'],
+        username=os.environ['REDDIT_USERNAME'],
+    )
+else:
+    reddit = praw.Reddit('sentimentBot')
 
 app = Flask(__name__)
 
