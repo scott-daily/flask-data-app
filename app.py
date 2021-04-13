@@ -6,6 +6,8 @@ import os
 
 is_prod = os.environ.get('IS_HEROKU', None)
 
+reddit = None
+
 if is_prod:
     reddit = praw.Reddit(
         client_id=os.environ['CLIENT_ID'],
@@ -43,7 +45,7 @@ def predict():
 
 @app.route('/api/score', methods=['POST'])
 def get_score():
-    reddit = praw.Reddit('sentimentBot')
+    #reddit = praw.Reddit('sentimentBot')
     searchTerm = request.form['searchTerm']
 
     positive_count = 0
