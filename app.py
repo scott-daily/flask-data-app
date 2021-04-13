@@ -26,8 +26,7 @@ review_clf = joblib.load('review_clf.joblib')
 # Use output.item() to convert from numpy int64 to native python int so it can be serialized to json for transmission.
 @app.route('/api/predict', methods=['POST'])
 def predict():
-    data = request.form['review'] #.get_json(force=True)
-    print(data)
+    data = request.form['review']
     data_list = []
     data_list.append(data)
     prediction = review_clf.predict(data_list)
