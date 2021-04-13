@@ -1,0 +1,7 @@
+/env
+/__pycache__
+*.ini
+instance/
+.env
+venv/
+*.pyc

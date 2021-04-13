@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css')}}" />
+    </head>
+
+    <body>
+        <div class="center-vertical card-shadow">
+            {%if wrongpw %}
+                    <span class="warning">Incorrect password, please try again!</span>
+            {% endif %}
+            <form action="/signin" method = "POST">
+                <p><h3>Enter password</h3></p>
+                <p><input type='text' name='pw' /></p>
+                <p><button class="button" type='submit' value='Submit'>Submit</button></p>
+            </form>
+        </div>
+    </body>

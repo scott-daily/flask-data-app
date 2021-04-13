@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}
+Descriptive Visualizations
+{% endblock %}
+{% block content %}
+<div>
+    <h1> Amazon Review Sentiment K-means Visualizations</h2>
+        <h3>Bar chart showing review scores distribution among clusters</h3>
+            <iframe src="../static/cluster_score_bar_chart.html" height="600" width="1000" title="Cluster Score Bar Chart"></iframe>
+            <h4>We can see from this chart that cluster 1 was strongly correlated with good scores.</h4>
+        <br>
+        <h3>Scatter chart showing relationship of review length between clusters</h3>
+            <iframe src="../static/cluster_score_scatter.html" height="600" width="1000" title="Cluster Score Bar Chart"></iframe>
+            <h4>From this scatter chart we can see that clusters 1 and 8 tended to have the longest reviews.</h4>
+        <br>
+        <h3>Heatmap showing correlation of scores to clusters.</h3>
+            <iframe src="../static/score_cluster_heatmap.html" height="600" width="1000" title="Cluster Score Bar Chart"></iframe>
+            <h4></h4>
+        <h4>From this heatmap we can surmise that cluster 0 tended to be associated with negative reviews.</h4>
+</div>
+{% endblock %}

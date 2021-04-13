@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block title %}
+Home
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css')}}" />
+{% endblock %}
+{% block content %}
+    <h1>Review Sentiment Predictor</h1>
+    <form action="/api/predict" method = "POST">
+        <p><h4>Enter a test review to evaluate the review classifiers prediction.</h4></p>
+        <p><input type='text' name='review' size='75' /></p>
+        <p><button class="button" type='submit' value='Submit'>Submit</button></p>
+        {%if output %}
+                <span class="message">The model predicted: {{ output.data.decode('UTF-8') }} </span>
+        {% endif %}
+    </form>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+        <form action="/api/score" method = "POST">
+            <p><h4>Enter a search term to see the overall sentiment of the 50 most recent mentions on Reddit, using the review classifier's predictions.</h4></p>
+            <p><input type='text' name='searchTerm' size='40' /></p>
+            <div class="loader" id="loader"></div>
+            <div id="myDiv">
+                <p><button class="button" type='submit' value='Submit' onclick="showLoader();">Submit</button></p>
+                {%if positive_count %}
+                        <span class="message">
+                            {{ positive_count.data.decode('UTF-8') }} results were positive and  
+                            {{ negative_count.data.decode('UTF-8') }} were negative.
+                        </span>
+            
+                    <br>
+                    <hr>
+                    <canvas class="center" id="myChart" width="400" height="400"></canvas>
+                </div>
+                    <script>
+                        var positiveCount = {{ positive_count.data.decode("UTF-8") | safe }};
+                        var negativeCount = {{ negative_count.data.decode("UTF-8") | safe }};
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Positive', 'Negative'],
+                                datasets: [{
+                                    label: 'Positive / Negative Count',
+                                    data: [positiveCount, negativeCount],
+                                    backgroundColor: [
+                                        'rgba(92, 169, 4, .9)',
+                                        'rgba(178, 34, 34, 0.9)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(0, 0, 0, 1)',
+                                        'rgba(0, 0, 0, 1)'
+                                    ],
+                                    borderWidth: 2
+                                }]
+                            },
+                            options: {
+                                responsive: false
+                            }
+                        });
+                    </script>
+            {% endif %} 
+        </form>
+        <script>
+            function showLoader() {
+              document.getElementById("loader").style.display = "block";
+              document.getElementById("myDiv").style.display = "none";
+            }
+            </script>
+{% endblock %}

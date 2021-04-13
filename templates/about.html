@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}
+About
+{% endblock %}
+{% block content %}
+<p>
+    This is a flask web application that was created to allow interaction with a Multinomial Naive Bayes sentiment classifier that was trained
+    on a large Amazon review data set that consisted of over 500,000 reviews.  The data set was cleaned and prepared for use within a jupyter notebook. The 
+    model was trained in the notebook following this, and then converted to joblib format to be saved.
+<br><br>
+    Following training, the model was able to predict review sentiment correctly 93% of the time, on a test data set.
+</p>
+<br>
+<p>
+    The web application also contains a visualizations section, which shows three different interactive charts, based on a K-means clustering of the data set.  
+    The K-means algorithm was set to make 15 clusters.  This was cleaned and prepared similarly to the sentiment classifier.  
+</p>
+{% endblock %}
