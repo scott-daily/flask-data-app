@@ -44,7 +44,6 @@ def predict():
 
 @app.route('/api/score', methods=['POST'])
 def get_score():
-    #reddit = praw.Reddit('sentimentBot')
     searchTerm = request.form['searchTerm']
 
     positive_count = 0
@@ -69,8 +68,6 @@ def get_score():
         negative_count=jsonify(negative_count),
         search_term=jsonify(searchTerm)
     )
-    #print("Positive Count: " + str(positive_count))
-    #print("Negative Count: " + str(negative_count))
 
 @app.route("/hello/")
 @app.route("/hello/<name>")
